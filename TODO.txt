@@ -1,0 +1,18 @@
+aDroneIF
+ - processo che parla con ardupilot (per leggere GPS e parametri e che manda i comandi)
+ - thread che legge i dati dei sensori di gas e li filtra (un dato al secondo?)
+ - lancia mavproxy per splittare lo streaming dal singolo drone a diversi servizi
+
+swarmManager
+ - processo che legge i dati mandati dai droni
+ - calcola le coordinate per il movimento dei droni
+ - manda alle droneIFs le nuove coordinate
+ - gira i dati dei sensori a mapViewer
+
+mapViewer
+ - thread lanciato da swarmManager?
+ - gestisce la rappresentazione dei dati sulla mappa
+ 
+
+strutture dati per mandare i comandi dal manager ai singoli droni
+modo per comunicare tra swarmManager e mapViewer

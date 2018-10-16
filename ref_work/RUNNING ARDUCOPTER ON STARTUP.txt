@@ -1,0 +1,49 @@
+FIRST WAY: rc.local
+
+sudo nano /etc/rc.local
+
+Here you can add the tasks the BBBlue has to do at startup. It is a normal script. Just ensure to place an "&" when you launch arducopter 
+(like this: /home/debian/arducopter/arducopter-3_5_4 -B /dev/ttyS2 -C udp:192.168.8.72:14560 &) in order no to be stuck forever!
+
+SECOND WAY: ArduCopter.service
+
+it seems that startup via /etc/rc.local is coming to an end and replaced by systemd tasks.
+After some study I deleted the startup sequence in /etc/rc.local and replaced it by a new file:
+
+sudo nano /lib/systemd/system/ArduCopter.service
+
+    [Unit]
+    Description=ArduCopter Service
+    After=bb-wl18xx-wlan0.service
+
+    [Service]
+    ExecStartPre=/bin/echo uart > /sys/devices/platform/ocp/ocp\:P9_21_pinmux/state
+    ExecStartPre=/bin/echo uart > /sys/devices/platform/ocp/ocp\:P9_22_pinmux/state
+    ExecStart=/usr/bin/ardupilot/blue-arducopter -A udp:192.168.0.27:14550 -B /dev/ttyS2
+    StandardOutput=null
+
+    [Install]
+    WantedBy=multi-user.target
+    Alias=arducopter.service
+
+(see examples of .service files in /lib/systemd/system )
+
+cd /lib/systemd/system
+
+enable the new service with:
+sudo systemctl enable arducopter.service
+
+and start the service with:
+sudo systemctl start arducopter.service
+
+reboot BB Blue
+
+#stop it with
+sudo systemctl stop arducopter.service
+
+sudo systemctl disable arducopter.service
+
+
+
+
+ArduCopter is now saved as startup service every time the system boots.

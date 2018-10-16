@@ -1,0 +1,48 @@
+#demo eni
+%userprofile%\Downloads\WinPython-64bit-2.7.13.1Zero\SITL.bat
+%userprofile%\Downloads\WinPython-64bit-2.7.13.1Zero\demo_eni.bat
+
+#first flight - simulation
+%userprofile%\Downloads\WinPython-64bit-2.7.13.1Zero\single_SITL.bat
+%userprofile%\Downloads\WinPython-64bit-2.7.13.1Zero\first_flight_SITL.bat
+
+#first flight - real world (Connect to the BBBlue Wi-Fi network)
+%userprofile%\Downloads\WinPython-64bit-2.7.13.1Zero\first_flight_part_one.bat
+%userprofile%\Downloads\WinPython-64bit-2.7.13.1Zero\first_flight.bat
+
+#pairing SITL
+%userprofile%\Downloads\WinPython-64bit-2.7.13.1Zero\pairing_SITL.bat
+%userprofile%\Downloads\WinPython-64bit-2.7.13.1Zero\pairing_SITL_2.bat
+
+#pairing SITL hybrid (SITL flight with data acquisition on physical drone)
+%userprofile%\Downloads\WinPython-64bit-2.7.13.1Zero\pairing_SITL.bat
+%userprofile%\Downloads\WinPython-64bit-2.7.13.1Zero\pairing_SITL_2_hybrid.bat
+
+#MOST UPDATED: 
+
+#first flight + script grafici live - real world (Connect to the BBBlue Wi-Fi network)
+%userprofile%\Downloads\WinPython-64bit-2.7.13.1Zero\first_flight_and_graph_part_one.bat     < ----- TEST BATTERIA
+%userprofile%\Downloads\WinPython-64bit-2.7.13.1Zero\first_flight_and_graph_part_two.bat
+#per GPS:  
+%userprofile%\Downloads\WinPython-64bit-2.7.13.1Zero\first_flight_and_graph_part_two_GPS.bat < ----- TEST BATTERIA
+
+#two drones independently flying
+%userprofile%\Downloads\WinPython-64bit-2.7.13.1Zero\two_drones_part_one.bat
+
+SENSORI
+su beaglebone:
+sudo /home/debian/arducopter/arducopter-3_5_2 -C udp:192.168.1.15:14550
+
+e
+
+sudo /var/lib/cloud9/RoboticsCapeInstaller/Robotics_Cape_Installer/examples/rc_test_adc/rc_test_adc
+
+#sudo python /home/debian/python_code/tcp.py --connect 192.168.1.15:5760
+
+su portatile
+
+python GCS_wLogGraph_and_map.py --connect1 udp:192.168.8.72:14560
+
+python GCS.py --connect1 192.168.1.15:14550
+
+#python GCS.py --connect1 192.168.1.15:14550 --tcpip1 192.168.1.15:5760

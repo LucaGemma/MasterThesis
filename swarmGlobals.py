@@ -8,6 +8,7 @@ import threading
 
 uav_n = 1				  # number of drones in the swarm - 1
 ctrl_l = 0				  # swarm control law identifier
+k = 20
 fname = "droneSwarmMng"	  # name of the log file
 log_l = logging.WARNING	  # log level
 ver = 'v0.1'			  # program version

@@ -6,7 +6,7 @@ import threading
 
 # ---------------------------------------- Constants declaration ----------------------------------------------------- #
 
-uav_n = 100				  # number of drones in the swarm - 1
+uav_n = 1				  # number of drones in the swarm - 1
 ctrl_l = 0				  # swarm control law identifier
 z = 15
 fname = "droneSwarmMng"	  # name of the log file

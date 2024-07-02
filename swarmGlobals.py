@@ -3,6 +3,7 @@
 import logging
 import re
 import threading
+import numpy
 
 # ---------------------------------------- Constants declaration ----------------------------------------------------- #
 
